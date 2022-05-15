@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class NahrungsmittelRestController {
+public class FoodRestController {
 
     private List<Food> foodlist;
 
-    public NahrungsmittelRestController() {
+    public FoodRestController() {
         foodlist = new ArrayList<>();
         foodlist.add(new Food(1, "Banane", 30, 20, 39, 200));
         foodlist.add(new Food(2, "Apfel", 100, 8, 12, 400));
