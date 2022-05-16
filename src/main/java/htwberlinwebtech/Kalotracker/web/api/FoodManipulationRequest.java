@@ -1,6 +1,6 @@
 package htwberlinwebtech.Kalotracker.web.api;
 
-public class FoodCreateRequest {
+public class FoodManipulationRequest {
 
     private String name;
     private int carbs;
@@ -8,7 +8,7 @@ public class FoodCreateRequest {
     private int proteins;
     private int kalories;
 
-    public FoodCreateRequest(String name, int carbs, int fat, int proteins, int kalories) {
+    public FoodManipulationRequest(String name, int carbs, int fat, int proteins, int kalories) {
         this.name = name;
         this.carbs = carbs;
         this.fat = fat;

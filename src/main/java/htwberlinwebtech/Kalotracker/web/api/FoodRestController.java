@@ -3,10 +3,7 @@ package htwberlinwebtech.Kalotracker.web.api;
 
 import htwberlinwebtech.Kalotracker.service.FoodService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -27,10 +24,28 @@ public class FoodRestController {
         return ResponseEntity.ok(foodService.findAll());
     }
 
+    @GetMapping(path = "/api/v1/food/{id}")
+    public ResponseEntity<Food> fetchFoodById(@PathVariable Long id){
+        var food = foodService.findById(id);
+        return food != null? ResponseEntity.ok(food) : ResponseEntity.notFound().build();
+
+    }
+
     @PostMapping(path = "/api/v1/food")
-    public ResponseEntity<Void> createFood(@RequestBody FoodCreateRequest request) throws URISyntaxException {
+    public ResponseEntity<Void> createFood(@RequestBody FoodManipulationRequest request) throws URISyntaxException {
         var food= foodService.create(request);
         URI uri = new URI("/api/v1/food/" + food.getId());
         return ResponseEntity.created(uri).build();
+    }
+    @PutMapping(path = "/api/v1/food/{id}")
+    public ResponseEntity<Food> updateFood(@PathVariable Long id, @RequestBody FoodManipulationRequest request) {
+        var food = foodService.update(id, request);
+        return food != null? ResponseEntity.ok(food) : ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping(path = "/api/v1/food/{id}")
+    public ResponseEntity<Void> deleteFood(@PathVariable Long id) {
+        boolean successful = foodService.deleteById(id);
+        return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 }
