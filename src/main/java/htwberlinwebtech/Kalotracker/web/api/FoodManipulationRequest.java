@@ -16,6 +16,10 @@ public class FoodManipulationRequest {
         this.kalories = kalories;
     }
 
+    public FoodManipulationRequest(){
+
+    }
+
     public String getName() {
         return name;
     }
